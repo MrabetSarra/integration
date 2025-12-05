@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Confirmation - Covoiturage ESPRIT (Modal)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal-show { animation: fadeIn .18s ease-out both; }
+    .modal-hide { animation: fadeOut .14s ease-in both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px) scale(.995);} to { opacity:1; transform: translateY(0) scale(1);} }
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(6px) scale(.995);} }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- NOTE:
+       This file contains only the modal + script.
+       Copy the entire <div id="confirmModal">...</div> and the <script>...</script>
+       into the bottom of your conducteur.html (just before </body>).
+       Then change your "Confirmer" button to type="button" and add id="confirmBtn".
+       See the short instructions/snippet after this file.
+  -->
+
+  <!-- Modal block (hidden by default). Paste this into conducteur.html -->
+  <div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center" aria-hidden="true">
+    <!-- Overlay -->
+    <div id="confirmModalOverlay" class="absolute inset-0 bg-black/50 transition-opacity"></div>
+
+    <!-- Modal panel -->
+    <div role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle" aria-describedby="confirmModalDesc"
+         class="relative w-full max-w-lg mx-4">
+      <div id="confirmModalPanel" class="bg-white rounded-lg shadow-xl overflow-hidden transform transition-all modal-show">
+        <div class="px-6 pt-6 pb-4 text-center">
+          <div class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-green-100 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+
+          <h2 id="confirmModalTitle" class="text-xl font-bold text-gray-800 mb-2">Conducteur confirmé</h2>
+          <p id="confirmModalDesc" class="text-gray-600 text-sm mb-4">
+            Le conducteur a bien été confirmé. Les participants recevront la notification et le trajet sera partagé.
+          </p>
+
+          <div id="confirmDetails" class="bg-gray-50 border border-gray-100 rounded-md p-3 text-left text-sm text-gray-700">
+            <p class="font-medium">Nom : <span id="confirmName" class="font-normal">—</span></p>
+            <p class="font-medium mt-1">Trajet : <span id="confirmRoute" class="font-normal">—</span></p>
+            <p class="font-medium mt-1">Date / Heure : <span id="confirmTime" class="font-normal">—</span></p>
+            <p class="font-medium mt-1">Places réservées : <span id="confirmSeats" class="font-normal">—</span></p>
+          </div>
+        </div>
+
+        <div class="px-6 pb-6 pt-2 flex gap-3 justify-center">
+          <a href="driver-profile.html" id="viewProfileBtn"
+             class="inline-block w-full text-center px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 hover:bg-gray-50">
+            Voir le profil
+          </a>
+
+          <button id="closeConfirmBtn" type="button"
+                  class="inline-block w-full text-center px-4 py-3 rounded-lg bg-[#CB151A] text-white hover:bg-[#b01214]">
+            Fermer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const modal = document.getElementById('confirmModal');
+      const panel = document.getElementById('confirmModalPanel');
+      const overlay = document.getElementById('confirmModalOverlay');
+      const closeBtn = document.getElementById('closeConfirmBtn');
+
+      // Show modal and populate dynamic fields
+      function showModal(data = {}) {
+        if (data.name) document.getElementById('confirmName').textContent = data.name;
+        if (data.route) document.getElementById('confirmRoute').textContent = data.route;
+        if (data.time) document.getElementById('confirmTime').textContent = data.time;
+        if (data.seats) document.getElementById('confirmSeats').textContent = data.seats;
+
+        modal.classList.remove('hidden');
+        document.documentElement.style.overflow = 'hidden';
+        panel.classList.remove('modal-hide');
+        panel.classList.add('modal-show');
+        closeBtn.focus();
+      }
+
+      function hideModal() {
+        panel.classList.remove('modal-show');
+        panel.classList.add('modal-hide');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          panel.classList.remove('modal-hide');
+          document.documentElement.style.overflow = '';
+        }, 140);
+      }
+
+      window.showDriverConfirmed = showModal; // exposed so you can call it manually if needed
+
+      // Auto-bind to a button with id="confirmBtn" if present on the page.
+      // It will read data attributes (data-name, data-route) if set,
+      // and will read form inputs with ids 'date', 'time', 'seats' if present.
+      const autoBtn = document.getElementById('confirmBtn');
+      if (autoBtn) {
+        autoBtn.addEventListener('click', function (ev) {
+          ev.preventDefault();
+
+          const name = autoBtn.dataset.name || (document.querySelector('h2.font-serif.font-bold')?.textContent || '—').trim();
+          const route = autoBtn.dataset.route || '—';
+          const date = (document.getElementById('date')?.value) || '';
+          const time = (document.getElementById('time')?.value) || '';
+          const seats = (document.getElementById('seats')?.value) || (autoBtn.dataset.seats || '—');
+
+          const dateTime = [date, time].filter(Boolean).join(' / ') || '—';
+
+          showModal({
+            name,
+            route,
+            time: dateTime,
+            seats
+          });
+        });
+      }
+
+      // Close handlers
+      closeBtn.addEventListener('click', hideModal);
+      overlay.addEventListener('click', hideModal);
+      window.addEventListener('keydown', (e) => {
+        if ((e.key === 'Escape' || e.key === 'Esc') && !modal.classList.contains('hidden')) hideModal();
+      });
+    })();
+  </script>
+</body>
+</html>

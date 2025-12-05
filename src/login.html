@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cov-e esprit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .header-bg {
+      background-color: rgba(255, 255, 255, 0.32); /* Opacité 32% */
+    }
+    
+    .image-overlay {
+      position: relative;
+    }
+    
+    .image-overlay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6); /* Overlay noir avec opacité 60% */
+      z-index: 1;
+    }
+    
+    .image-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .info-card {
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:10px;
+      padding:22px;
+      background:#fff;
+      box-shadow:0 6px 20px rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Section Hero avec image et overlay -->
+  <section class="relative">
+    <!-- Header au-dessus de l'image -->
+    <header class="header-bg shadow-sm py-4 absolute w-full top-0 z-50">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <!-- Logo à gauche -->
+        <div class="flex items-center space-x-2">
+          <img src="images/logo.png" alt="Logo cov-e esprit" class="w-50 h-10">
+        </div>
+        
+        <!-- Navigation au centre - liens en noir -->
+        <div class="hidden md:flex space-x-8">
+          <a href="HomePage.html" class="font-medium text-black hover:text-red-500 transition">Home</a>
+          <a href="About.html" class="font-medium text-black hover:text-red-500 transition">About</a>
+          <a href="contact.html" class="font-medium text-black hover:text-red-500 transition">Contact</a>
+          <a href="covoiturage.html" class="font-medium text-black hover:text-red-500 transition">Covoiturage</a>
+        </div>
+        
+        <!-- Icônes à droite - seulement menu et profil -->
+        <div class="flex items-center space-x-4">
+          <!-- Icône de menu -->
+          <button class="text-black hover:text-red-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          
+          <!-- Icône de profil -->
+          <button class="text-black hover:text-red-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Image avec overlay noir 60% -->
+    <div class="image-overlay">
+      <img src="images/login.png" alt="Image principale" class="w-full h-[500px] object-cover">
+      
+      <!-- Contenu au-dessus de l'image (Hero Section) -->
+      <div class="image-content absolute inset-0 flex items-center">
+        <div class="container mx-auto px-6">
+          <div class="flex items-center">
+            <!-- Texte à gauche -->
+            <div class="w-1/2 max-w-md text-white">
+              <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                Un campus,<br>plusieurs cultures,<br>un même trajet.
+              </h1>
+
+              <p class="text-sm md:text-base text-white/90 mb-6">
+                Partage ta voiture. Fais de nouvelles rencontres. Déplace-toi autrement à ESPRIT.
+              </p>
+
+              <!-- Logo voiture avec lignes -->
+              <div class="flex items-center gap-6">
+                <span class="text-white text-2xl tracking-widest">_ _ _ _</span>
+                <img src="images/car.png" alt="Logo voiture" class="w-20 h-20 object-contain">
+                <span class="text-white text-2xl tracking-widest">_ _ _ _</span>
+              </div>
+            </div>
+
+            <!-- Espace vide à droite -->
+            <div class="w-1/2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT: form overlaps bottom of image; info-card below but pushed further down -->
+  <section class="container mx-auto px-4 relative z-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+      <!-- Left column (info card) - add extra top margin so it descends -->
+      <div class="lg:col-span-5">
+        <div class="mt-24 md:mt-28 lg:mt-32 info-card max-w-lg">
+          <h4 class="font-semibold text-gray-800 mb-3">Questions générales</h4>
+          <p class="text-sm text-gray-600 mb-4">
+            Contactez-nous à <a href="mailto:covoiturage@esprit.tn" class="text-red-600 font-medium">covoiturage@esprit.tn</a>
+            et nous vous répondrons dans les plus brefs délais.
+          </p>
+
+          <h4 class="font-semibold text-gray-800 mb-3">Devenir conducteur ?</h4>
+          <p class="text-sm text-gray-600 mb-4">
+            Postulez pour devenir conducteur sur notre page dédiée ou envoyez-nous un email à
+            <a href="mailto:conducteurs@esprit.tn" class="text-red-600 font-medium">conducteurs@esprit.tn</a>
+          </p>
+
+          <h4 class="font-semibold text-gray-800 mb-3">Proposer un trajet régulier ?</h4>
+          <p class="text-sm text-gray-600">
+            Rejoignez notre programme de trajets réguliers en nous contactant à
+            <a href="mailto:trajets-reguliers@esprit.tn" class="text-red-600 font-medium">trajets-reguliers@esprit.tn</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right column: login form - overlap image by negative margin -->
+      <div class="lg:col-span-7">
+        <div class="-mt-40 md:-mt-44 lg:-mt-48">
+          <div class="w-full max-w-lg mx-auto lg:ml-auto bg-white rounded-xl shadow-lg p-6 md:p-8 relative z-30">
+            <h3 class="text-2xl font-semibold text-center mb-1">Connectez-vous à votre compte</h3>
+            <p class="text-center text-sm text-gray-500 mb-6">Content de vous revoir ! Saisissez vos informations pour vous connecter à votre compte.</p>
+
+            <form class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                <input type="email" placeholder="Saisissez votre e-mail"
+                       class="w-full rounded-full px-6 py-3 bg-[#5b5757] text-white placeholder-gray-300 border-none focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
+                <input type="password" placeholder="Saisissez votre mot de passe"
+                       class="w-full rounded-full px-6 py-3 bg-[#5b5757] text-white placeholder-gray-300 border-none focus:outline-none" />
+              </div>
+
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 text-sm text-gray-600">
+                  <input type="checkbox" class="h-4 w-4 rounded border-gray-300" /> Se souvenir de moi
+                </label>
+                <a href="#" class="text-sm text-red-600 hover:underline font-medium">Mot de passe oublié ?</a>
+              </div>
+
+              <div class="pt-2">
+          <a href="HomePage.html"
+   class="block mx-auto w-48 bg-[#CB151A] text-white py-3 rounded-full font-semibold hover:bg-[#b01214] focus:outline-none focus:ring-4 focus:ring-red-200 text-center">
+  Se connecter
+</a>
+        </div>
+
+              <div class="flex items-center gap-3 my-6">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <div class="text-sm text-gray-400">Ou continuer avec</div>
+                <div class="flex-1 h-px bg-gray-200"></div>
+              </div>
+
+              <div class="space-y-3">
+                <button type="button" class="w-full bg-gray-100 rounded-lg py-3 flex items-center justify-center gap-3 border border-gray-200">
+                  <img src="images/google.png" alt="Google" class="w-5 h-5" />
+                  <span class="text-sm text-gray-700">Se connecter avec Google</span>
+                </button>
+
+                <button type="button" class="w-full bg-gray-100 rounded-lg py-3 flex items-center justify-center gap-3 border border-gray-200">
+                  <img src="images/apple.png" alt="Apple" class="w-5 h-5" />
+                  <span class="text-sm text-gray-700">Se connecter avec Apple</span>
+                </button>
+              </div>
+
+              <p class="text-center text-sm text-gray-500 mt-4">
+                Nouveau parmi nous ? <a href="./signup.html" class="text-red-600 font-medium">Créer un compte</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden rounded-lg mt-8 h-48 md:h-64 lg:h-80">
+    <!-- Background image (fills the wrapper) -->
+    <img src="./images/login1.png" alt="Conducteur au volant, ambiance de covoiturage"
+         class="absolute inset-0 w-full h-full object-cover" />
+
+    <!-- Dark overlay for readable white text -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Optional centered content (title, buttons, etc.) -->
+    <div class="relative z-10 flex items-center justify-center h-full">
+      <!-- <h2 class="text-white text-lg md:text-2xl font-semibold">Votre texte ici</h2> -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+<footer class="bg-[#CB151A] text-white py-12">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Colonne 1: À Propos -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">À Propos</h2>
+        <p class="text-red-100 mb-6">Covoiturage ESPRIT connecte les étudiants étrangers pour des trajets partagés, économiques et écologiques. Rejoignez notre communauté solidaire.</p>
+        
+        <h3 class="text-xl font-bold mb-4">Coordonnées</h3>
+        <ul class="space-y-2 text-red-100">
+          <li>ESPRIT, El Ghazala, Ariana - Tunisie</li>
+          <li>covoiturage@esprit.tn</li>
+          <li>+216 70 000 000</li>
+        </ul>
+
+        <!-- Social icons (left bottom) using local images -->
+        <div class="mt-6">
+          <div class="flex items-center space-x-3">
+            <!-- Instagram -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white hover:opacity-90 transition">
+              <img src="images/insta.png" alt="Instagram" class="w-5 h-5 object-contain" loading="lazy">
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white hover:opacity-90 transition">
+              <img src="images/facebook.png" alt="Facebook" class="w-5 h-5 object-contain" loading="lazy">
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/216700000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white hover:opacity-90 transition">
+              <img src="images/whatsapp.png" alt="WhatsApp" class="w-5 h-5 object-contain" loading="lazy">
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Colonne 2: Liens Rapides -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">Liens Rapides</h3>
+        <div class="grid grid-cols-1 gap-3 text-red-100">
+          <a href="#" class="hover:text-white transition">Covoiturage Campus</a>
+          <a href="#" class="hover:text-white transition">Trajets Réguliers</a>
+          <a href="#" class="hover:text-white transition">Trajets Aéroport</a>
+          <a href="#" class="hover:text-white transition">Proposer un Trajet</a>
+          <a href="#" class="hover:text-white transition">Devenir Conducteur</a>
+        </div>
+      </div>
+      
+      <!-- Colonne 3: Newsletter -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+        <p class="text-red-100 mb-6">Inscrivez-vous pour recevoir les actualités de la plateforme, les astuces covoiturage et les événements de la communauté étudiante.</p>
+        
+        <div class="flex flex-col gap-4">
+          <input 
+            type="email" 
+            placeholder="Votre email" 
+            class="bg-white text-gray-800 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-white"
+          >
+          <button class="bg-white text-[#CB151A] hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition">
+            S'abonner
+          </button>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Copyright -->
+    <div class="border-t border-[#B31217] mt-8 pt-8 text-center text-red-100">
+      <p>Copyright © 2024 Covoiturage ESPRIT. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
